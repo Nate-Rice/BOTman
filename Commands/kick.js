@@ -19,7 +19,6 @@ module.exports.run = async (bot, message, args) => {
   message.guild.member(User).kick(Reason);
   message.channel.send(kickEmbed);
 
-
 }
 
 module.exports.help = {

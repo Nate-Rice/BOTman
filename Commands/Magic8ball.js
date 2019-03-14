@@ -6,7 +6,8 @@ module.exports.run = async (bot, message, args) => {
   let replies = ["Yes.", "No.", "I don't know.", "Ask again later."];
 
 
-  let result = Math.floor((Math.random() * replies.length));
+  let result = Math.floor((Math.random() * replies.length)); //Math.random() gets number between 0 and 1
+                                                             //Math.floor() grabs less than or equal value
   let question = args.slice(1).join(" ");
 
   message.channel.send(replies[result]);
