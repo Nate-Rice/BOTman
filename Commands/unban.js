@@ -10,21 +10,25 @@ module.exports.run = async (bot, message, args) => {
   try {
     //message.guild.member(User).unban(Reason);
     message.guild.unban(User);
+    message.channel.send(`User with user id: ${User} has been unbanned.`)
   } catch(e) {
-      console.log(e.message)
+    console.log(e.message)
   }
 
+  /*m 
+  //let User2 = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+  let User2 = user.username(User);
   let unbanEmbed = new Discord.RichEmbed()
   .setDescription("Unban")
   .setColor("#db1125")
-  .addField("Unbanned User", `${User} with ID ${User.id}`)
+  .addField("Unbanned User", `${User2} with ID ${User}`)
   .addField("Unbanned By", `<@${message.author.id}> with ID ${message.author.id}`)
   .addField("Unbanned In", message.channel)
   .addField("Time", message.createdAt)
   .addField("Reason", Reason);
 
   //message.guild.member(User).unban(Reason);
-  message.channel.send(unbanEmbed);
+  message.channel.send(unbanEmbed); */
 
 
 }
