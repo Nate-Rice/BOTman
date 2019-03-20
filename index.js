@@ -67,4 +67,15 @@ bot.on("message", async message => {
 
 });
 
+bot.on("guildMemberAdd", async member => {
+  console.log(member.user.username);
+  member.guild.channels.get('446888839001145355').send('*' + member.user.username + '* has joined the server!')
+})
+
+bot.on("guildMemberRemove", async member => {
+  console.log(member.user.username);
+  member.guild.channels.get('446888839001145355').send('*' + member.user.username + '* has left the server!')
+})
+
+
 bot.login(botconfig.token);
