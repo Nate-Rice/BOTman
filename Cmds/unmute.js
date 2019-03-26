@@ -1,24 +1,24 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (bot, message, args) => {
-  let User = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-  if(!User) return message.channel.send("Couldn't find user.");
+module.exports.run = async (bot, msg, args) => {
+  let User = msg.guild.member(msg.mentions.users.first() || msg.guild.members.get(args[0]));
+  if(!User) return msg.channel.send("Couldn't find user.");
   //let Reason = args.join(" ").slice(22);
-  //if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("You do not have the authority to do that!");
-  //if(User.hasPermission("BAN_MEMBERS")) return message.channel.send("Cannot ban that person!");
+  //if(!msg.member.hasPermission("BAN_MEMBERS")) return msg.channel.send("You do not have the authority to do that!");
+  //if(User.hasPermission("BAN_MEMBERS")) return msg.channel.send("Cannot ban that person!");
 
   let banEmbed = new Discord.RichEmbed()
   .setDescription("Mute")
   .setColor("#db1125")
   .addField("Unmuted User", `${User} with ID ${User.id}`)
-  .addField("Unmuted By", `<@${message.author.id}> with ID ${message.author.id}`)
-  .addField("Unmuted In", message.channel)
-  .addField("Time", message.createdAt)
+  .addField("Unmuted By", `<@${msg.author.id}> with ID ${msg.author.id}`)
+  .addField("Unmuted In", msg.channel)
+  .addField("Time", msg.createdAt)
   //.addField("Reason", Reason);
 
-  //message.guild.member(User).setMute(Reason);
-  message.member.setMute(false);
-  message.channel.send(banEmbed);
+  //msg.guild.member(User).setMute(Reason);
+  msg.member.setMute(false);
+  msg.channel.send(banEmbed);
 
 }
 

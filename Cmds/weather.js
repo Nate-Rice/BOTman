@@ -1,12 +1,12 @@
 const Discord = require("discord.js");
 const weather = require('weather-js');
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, msg, args) => {
   weather.find({search: args.join(" "), degreeType: 'F'}, function(err, result) {
-    if (err) message.channel.send(err);
+    if (err) msg.channel.send(err);
     var current = result[0].current;
     var location = result[0].location;
-    var forecast = result[0].forecast; //implement all days of the week later??
+    var forecast = result[0].forecast; //implement all days of the week possibly?
 
     const embed = new Discord.RichEmbed()
       .setDescription(`**${current.skytext}**`)
@@ -21,7 +21,7 @@ module.exports.run = async (bot, message, args) => {
       .addField('Winds',current.winddisplay, true)
       .addField('Humidity',`${current.humidity}%`, true)
 
-    message.channel.send(embed);
+    msg.channel.send(embed);
 
   });
 

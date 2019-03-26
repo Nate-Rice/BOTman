@@ -1,23 +1,23 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (bot, message, args) => {
-  let User = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-  if(!User) return message.channel.send("Couldn't find user.");
+module.exports.run = async (bot, msg, args) => {
+  let User = msg.guild.member(msg.mentions.users.first() || msg.guild.members.get(args[0]));
+  if(!User) return msg.channel.send("Unable to find user.");
   let Reason = args.join(" ").slice(22);
-  if(!message.member.hasPermission("KICK_MEMBERS")) return message.channel.send("You do not have the authority to do that!");
-  if(User.hasPermission("KICK_MEMBERS")) return message.channel.send("Cannot kick that person!");
+  if(!msg.member.hasPermission("KICK_MEMBERS")) return msg.channel.send("You do not have the authority to do that!");
+  if(User.hasPermission("KICK_MEMBERS")) return msg.channel.send("Unable to kick admins!");
 
   let kickEmbed = new Discord.RichEmbed()
   .setDescription("Kick")
   .setColor("#db1125")
   .addField("Kicked User", `${User} with ID ${User.id}`)
-  .addField("Kicked By", `<@${message.author.id}> with ID ${message.author.id}`)
-  .addField("Kicked In", message.channel)
-  .addField("Time", message.createdAt)
+  .addField("Kicked By", `<@${msg.author.id}> with ID ${msg.author.id}`)
+  .addField("Kicked In", msg.channel)
+  .addField("Time", msg.createdAt)
   .addField("Reason", Reason);
 
-  message.guild.member(User).kick(Reason);
-  message.channel.send(kickEmbed);
+  msg.guild.member(User).kick(Reason);
+  msg.channel.send(kickEmbed);
 
 }
 

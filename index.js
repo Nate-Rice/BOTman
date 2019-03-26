@@ -2,7 +2,10 @@ const botconfig = require("./botconfig.json");
 const Discord = require("discord.js");
 const bot = new Discord.Client({disableEveryone: true});
 const fs = require("fs");
+//const YTDL = require("ytdl-core");
 bot.commands = new Discord.Collection();
+
+var servers = {}; //for playing music on multiple discord servers.
 
 
 fs.readdir("./cmds/", (error, cfiles) => { //if file is not found, give error
@@ -19,6 +22,12 @@ fs.readdir("./cmds/", (error, cfiles) => { //if file is not found, give error
     bot.commands.set(cmds.help.name, cmds);
   });
 });
+
+/* function play(connection, message) {
+  var server = servers[message.guild.id];
+
+  server.dispatcher = connection.playStream(YTDL())
+} */
 
 bot.on("ready", async () => {
   console.log(`${bot.user.username} is now online`);
@@ -65,6 +74,24 @@ bot.on("message", async msg => {
 
     return msg.channel.send(serverembed);
   }
+
+  /* if(cmd === `${prefix}play`){
+    if (!args[1]) {
+      msg.channel.send("Please provide a Youtube link!");
+      return;
+    }
+    if (!MessageChannel.member.voiceChannel) {
+      msg.channel.send("You need to be in a voice chat to play music.");
+      return;
+    }
+
+
+    var server = servers[msg.guild.id];
+
+    if (!msg.guild.voiceConnection) msg.member.voiceChannel.join().then(function(connection) {
+      play(connection, msg);
+    });
+  } */
 
 });
 
