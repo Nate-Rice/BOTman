@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, msg, args) => {
 
-  if(!args[2]) return message.reply("Invalid question! Try again.");
+  if(!args[2]) return msg.reply("Invalid question! Try again.");
   let replies = ["Yes.", "No.", "I don't know.", "Ask again later."];
 
 
@@ -10,7 +10,7 @@ module.exports.run = async (bot, message, args) => {
                                                              //Math.floor() grabs less than or equal value
   //let question = args.slice(1).join(" ");
 
-  message.channel.send(replies[reply]);
+  msg.channel.send(replies[reply]);
 
 }
 

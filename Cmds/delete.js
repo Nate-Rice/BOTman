@@ -1,13 +1,13 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, msg, args) => {
 
-  //message.channel.fetchMessages({ limit: 2 })
+  //msg.channel.fetchmsgs({ limit: 2 })
   let nDelete = args[0];
-  message.channel.bulkDelete(nDelete); 
+  msg.channel.bulkDelete(nDelete); 
 
   //let Reason = args.join(" ").slice(22);
-  //message.channel.bulkDelete(2);
+  //msg.channel.bulkDelete(2);
   
 
 }

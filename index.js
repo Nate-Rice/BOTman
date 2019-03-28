@@ -97,12 +97,12 @@ bot.on("message", async msg => {
 
 bot.on("guildMemberAdd", async member => {
   console.log(member.user.username);
-  member.guild.channels.get('446888839001145355').send('*' + member.user.username + '* has joined the server!')
+  member.guild.channels.get('146358006982901760').send('*' + member.user.username + '* has joined the server!')
 })
 
 bot.on("guildMemberRemove", async member => {
   console.log(member.user.username);
-  member.guild.channels.get('446888839001145355').send('*' + member.user.username + '* has left the server!')
+  member.guild.channels.get('146358006982901760').send('*' + member.user.username + '* has left the server!')
 })
 
 

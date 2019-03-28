@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, msg, args) => {
 
   let serverembed = new Discord.RichEmbed()
   .setDescription("BOT COMMANDS")
@@ -10,7 +10,7 @@ module.exports.run = async (bot, message, args) => {
   .addField("!8ball 'question'", "Ask the magic 8 ball a question and see what the answer is.")
   .addField("!report <user> 'Report reason'", "Report a user for a given reason.")
 
-  message.channel.send(serverembed);
+  msg.channel.send(serverembed);
 
 }
 
