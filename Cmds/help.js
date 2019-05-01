@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (bot, msg, args) => {
+module.exports.run = async (bot, msg, args) => { //function with three arguments.
 
   let serverembed = new Discord.RichEmbed()
   .setDescription("BOT COMMANDS")

@@ -33,7 +33,7 @@ module.exports.run = async (bot, msg, args) => {
             .setThumbnail(sicon)
             .addField("Season(s)", `${seasons.text()}`)
             .addField("First seen", `${seen.text()}`)
-            .addField("Titles", `${titles.text()}`)
+            .addField("Titles", `${titles.text()}\n, `)
             
 
             msg.channel.send(charEmbed);

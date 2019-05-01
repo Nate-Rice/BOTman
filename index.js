@@ -18,7 +18,7 @@ fs.readdir("./cmds/", (error, cfiles) => { //if file is not found, give error
 
   jsF.forEach((file, i) =>{ //for each file, i = number of files
     let cmds = require(`./cmds/${file}`);
-    //console.log(`${file} loaded!`);
+    console.log(`${file} loaded!`);
     bot.commands.set(cmds.help.name, cmds);
   });
 });
@@ -43,6 +43,8 @@ bot.on("message", async msg => {
   let cmd = splitMsg[0];
   let args = splitMsg.slice(1); 
 
+
+  //for enable/disable commands, check here if command is in the file. If it is, it's disabled so don't run commandfile. If it's not in the file, run it.
   let commandfile = bot.commands.get(cmd.slice(prefix.length));
   if(commandfile) commandfile.run(bot, msg, args);
 
