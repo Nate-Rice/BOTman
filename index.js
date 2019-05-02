@@ -3,9 +3,10 @@ const Discord = require("discord.js");
 const bot = new Discord.Client({disableEveryone: true});
 const fs = require("fs");
 //const YTDL = require("ytdl-core");
+let id = JSON.parse(fs.readFileSync("./disabled.json"));
 bot.commands = new Discord.Collection(); //Discord utility class for storing data, like Map()
 
-var servers = {}; //for playing music on multiple discord servers.
+//var servers = {}; //for playing music on multiple discord servers.
 
 
 fs.readdir("./cmds/", (error, cfiles) => { //if file is not found, give error
@@ -44,9 +45,15 @@ bot.on("message", async msg => {
   let args = splitMsg.slice(1); 
 
 
-  //for enable/disable commands, check here if command is in the file. If it is, it's disabled so don't run commandfile. If it's not in the file, run it.
-  let commandfile = bot.commands.get(cmd.slice(prefix.length));
-  if(commandfile) commandfile.run(bot, msg, args); //Run the `exports.run()` function defined in each command.
+  if (typeof id[cmd.slice(prefix.length)] === 'undefined') {
+    let commandfile = bot.commands.get(cmd.slice(prefix.length));
+    if(commandfile) commandfile.run(bot, msg, args); //Run the `exports.run()` function defined in each command.
+  } else if (cmd.slice(prefix.length) == id[cmd.slice(prefix.length)].id) {
+    msg.channel.send("This command has been disabled!");
+  }
+
+  //let commandfile = bot.commands.get(cmd.slice(prefix.length));
+  //if(commandfile) commandfile.run(bot, msg, args); //Run the `exports.run()` function defined in each command.
 
 
   if(cmd === `${prefix}serverinfo`){
