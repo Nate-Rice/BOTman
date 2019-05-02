@@ -3,23 +3,23 @@ const Discord = require("discord.js");
 const bot = new Discord.Client({disableEveryone: true});
 const fs = require("fs");
 //const YTDL = require("ytdl-core");
-bot.commands = new Discord.Collection();
+bot.commands = new Discord.Collection(); //Discord utility class for storing data, like Map()
 
 var servers = {}; //for playing music on multiple discord servers.
 
 
 fs.readdir("./cmds/", (error, cfiles) => { //if file is not found, give error
   if(error) console.log(error);
-  let jsF = cfiles.filter(file => file.split(".").pop() === "js")
+  let jsF = cfiles.filter(file => file.split(".").pop() === "js") //Adding only JS files to array
   if(jsF.length <= 0){
     console.log("Couldn't find commands.");
     return;
   }
 
-  jsF.forEach((file, i) =>{ //for each file, i = number of files
+  jsF.forEach(file  => { 
     let cmds = require(`./cmds/${file}`);
     console.log(`${file} loaded!`);
-    bot.commands.set(cmds.help.name, cmds);
+    bot.commands.set(cmds.help.name, cmds); //Adding commands to Discord Collection
   });
 });
 
@@ -46,7 +46,7 @@ bot.on("message", async msg => {
 
   //for enable/disable commands, check here if command is in the file. If it is, it's disabled so don't run commandfile. If it's not in the file, run it.
   let commandfile = bot.commands.get(cmd.slice(prefix.length));
-  if(commandfile) commandfile.run(bot, msg, args);
+  if(commandfile) commandfile.run(bot, msg, args); //Run the `exports.run()` function defined in each command.
 
 
   if(cmd === `${prefix}serverinfo`){

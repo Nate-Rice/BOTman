@@ -3,8 +3,8 @@ const ytdl = require("ytdl-core");
 
 module.exports.run = async (bot, msg, args) => {
     if (!args[0]) {
-        //msg.channel.send("Please provide a Youtube link!");
-        msg.channel.send(`${args[0]}`);
+        msg.channel.send("Please provide a Youtube link!");
+        //msg.channel.send(`${args[0]}`);
         return;
     }
     if (!msg.member.voiceChannel) {
