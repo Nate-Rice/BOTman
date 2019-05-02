@@ -80,13 +80,13 @@ bot.on("message", async msg => {
 });
 
 bot.on("guildMemberAdd", async member => {
-  console.log(member.user.username);
-  member.guild.channels.get('146358006982901760').send('*' + member.user.username + '* has joined the server!')
+  //console.log(member.user.username);
+  member.guild.channels.get('573482245222957073').send('*' + member.user.username + '* has joined the server!')
 })
 
 bot.on("guildMemberRemove", async member => {
-  console.log(member.user.username);
-  member.guild.channels.get('146358006982901760').send('*' + member.user.username + '* has left the server!')
+  //console.log(member.user.username);
+  member.guild.channels.get('573482245222957073').send('*' + member.user.username + '* has left the server!')
 })
 
 

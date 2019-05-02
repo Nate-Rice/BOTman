@@ -37,23 +37,36 @@ module.exports.run = async (bot, msg, args) => {
     if (!wChannel) return MessageChannel.reply("Couldn't find channel");
     wChannel.send(wEmbed);
 
-    if (warns[User.id].warns == 2) {
-        let muteRole = msg.guild.roles.find(`name`, "muted");
-        if (!muteRole) return msg.reply("No mute role");
+    if (warns[User.id].warns === 2) {
+        try {
+            await User.setMute(true);
+        } catch (e) {
+            console.log(e.stack);
+        }
+        /* let muteRole = msg.guild.roles.find(`name`, "muted");
+        //if (!muteRole) return msg.reply("No mute role");
+        if (!muteRole) {
+            try {
+
+            } catch (e) {
+                console.log(e.stack);
+            }
+        }
         let mutetime = "10s";
-        await(User.id.addRole(muteRole.id));
+        await(User.addRole(muteRole.id));
         msg.channel.send(`${User.tag} has been temporarily muted`);
 
         setTimeout(function(){
             User.removeRole(muteRole.id);
             msg.channel.reply(`They have been unmuted.`);
-        }, ms(mutetime));
+        }, ms(mutetime)); */
     }
-    if (warns[User.id].warns == 3) {
+    if (warns[User.id].warns === 3) {
         console.log("here");
-        msg.guild.member(User).ban(reason);
+        msg.guild.member(User).ban(Reason);
         msg.channel.send(`${User.id} has been banned.`);
-    }
+        //warns[User.id].warns = 0;
+    };
 
 }
 

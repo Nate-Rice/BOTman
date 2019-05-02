@@ -17,7 +17,7 @@ module.exports.run = async (bot, msg, args) => {
   //.addField("Reason", Reason);
 
   //msg.guild.member(User).setMute(Reason);
-  msg.member.setMute(false);
+  await User.setMute(false);
   msg.channel.send(banEmbed);
 
 }
