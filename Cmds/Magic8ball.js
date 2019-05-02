@@ -7,10 +7,13 @@ module.exports.run = async (bot, msg, args) => {
 
 
   let reply = Math.floor((Math.random() * replies.length)); //Math.random() gets number between 0 and 1
-                                                             //Math.floor() grabs less than or equal value
-  //let question = args.slice(1).join(" ");
+                                                             //Math.floor() grabs less than or equal integer
 
-  msg.channel.send(replies[reply]);
+  let answerEmbed = new Discord.RichEmbed()
+  .setColor("#ab3ae0")
+  .addField("Answer:", replies[reply]);
+
+  msg.channel.send(answerEmbed);
 
 }
 

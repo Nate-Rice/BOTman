@@ -4,13 +4,18 @@ const cheerio = require("cheerio");
 
 module.exports.run = async (bot, msg, args) => {
 
-    if(!args[1]) return msg.reply("Please enter a first and last name.");
+    //if(!args[1]) return msg.reply("Please enter a first and last name.");
 
     //msg.channel.send(`https://gameofthrones.fandom.com/wiki/${args[0]}_${args[1]}`)
+    if(args[1]) { site = `https://gameofthrones.fandom.com/wiki/${args[0]}_${args[1]}` }
+    else if (args[0]) { site = `https://gameofthrones.fandom.com/wiki/${args[0]}` }
+    else {
+        return msg.reply("If the character has a last name, you must include it. Else, only first name");
+    }
 
 
     //check if there are 1 or 2 args. If 1, check URL for only first name. If 2, do below?
-    request(`https://gameofthrones.fandom.com/wiki/${args[0]}_${args[1]}`, (error, response, html) => {
+    request(`${site}`, (error, response, html) => {
         if (!(response.statusCode == 200)) {
             return msg.reply("Please enter a correct character name.");
         }
@@ -19,8 +24,8 @@ module.exports.run = async (bot, msg, args) => {
             const $ = cheerio.load(html);
             const seasons = $('#mw-content-text > aside > div:nth-child(3) > div');
             const seen = $('#mw-content-text > aside > div:nth-child(4) > div');
-            const titles = $('#mw-content-text > aside > div:nth-child(6) > div');
-            
+            const status = $('#mw-content-text > aside > div:nth-child(8) > div > a'); 
+            const culture = $('#mw-content-text > aside > div:nth-child(8) > div > a');           
             
             //const image = $('.pi-image-thumbnail');
             //const images = document.getElementsByTagName('img'); 
@@ -33,28 +38,12 @@ module.exports.run = async (bot, msg, args) => {
             .setThumbnail(sicon)
             .addField("Season(s)", `${seasons.text()}`)
             .addField("First seen", `${seen.text()}`)
-            .addField("Titles", `${titles.text()}\n, `)
+            .addField("Status", `${status.text()}`);
             
 
             msg.channel.send(charEmbed);
         }
     });
-
-    //msg.channel.send(args[1]);
-  
-    /* if (cmd === `${prefix}user`){
-        let sicon = msg.member.user.displayAvatarURL;
-        let serverembed = new Discord.RichEmbed()
-        .setDescription("User Information")
-        .setColor("#db1125")
-        .setThumbnail(sicon)
-        .addField("Your Username", msg.member.user.username)
-        .addField("Your Nickname", msg.member.displayName)
-        .addField("Your Role", msg.member.highestRole)
-        .addField("You joined on", msg.member.joinedAt);
-    
-        return msg.channel.send(serverembed);
-      } */
     
     
 }
@@ -62,5 +51,4 @@ module.exports.run = async (bot, msg, args) => {
 module.exports.help = {
   name: "info"
 }
-
 

@@ -12,7 +12,7 @@ module.exports.run = async (bot, msg, args) => {
       .setDescription(`**${current.skytext}**`)
       .setAuthor(`Weather for ${current.observationpoint}`)
       .setThumbnail(current.imageUrl)
-      .setColor("#db1125")
+      .setColor("#133fd3")
       .addField('Day',`${current.day}`, true)
       .addField('Timezone', `UTC${location.timezone}`, true)
       .addField('Degree Type', location.degreetype, true)
