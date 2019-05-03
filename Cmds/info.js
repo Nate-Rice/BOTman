@@ -7,8 +7,10 @@ module.exports.run = async (bot, msg, args) => {
     //if(!args[1]) return msg.reply("Please enter a first and last name.");
 
     //msg.channel.send(`https://gameofthrones.fandom.com/wiki/${args[0]}_${args[1]}`)
-    if(args[1]) { site = `https://gameofthrones.fandom.com/wiki/${args[0]}_${args[1]}` }
-    else if (args[0]) { site = `https://gameofthrones.fandom.com/wiki/${args[0]}` }
+    /* if(args[1]) { site = `https://gameofthrones.fandom.com/wiki/${args[0]}_${args[1]}` }
+    else if (args[0]) { site = `https://gameofthrones.fandom.com/wiki/${args[0]}` } */
+    if(args[1]) { site = `https://en.wikipedia.org/wiki/${args[0]}_${args[1]}` }
+    else if (args[0]) { site = `https://en.wikipedia.org/wiki/${args[0]}` }
     else {
         return msg.reply("If the character has a last name, you must include it. Else, only first name");
     }
@@ -25,13 +27,22 @@ module.exports.run = async (bot, msg, args) => {
             const seasons = $('#mw-content-text > aside > div:nth-child(3) > div');
             const seen = $('#mw-content-text > aside > div:nth-child(4) > div');
             const status = $('#mw-content-text > aside > div:nth-child(8) > div > a'); 
-            const culture = $('#mw-content-text > aside > div:nth-child(8) > div > a');           
+            const culture = $('#mw-content-text > aside > div:nth-child(14) > div'); 
+            //document.querySelector('#mw-content-text > p:nth-child(3)')
+
+
+            let element = $('#Character_description');
+            let el2 = element.closest('h2').next().find('p');
+            console.log(el2.text());
+            console.log(element.text());
+           
             
+
             //const image = $('.pi-image-thumbnail');
             //const images = document.getElementsByTagName('img'); 
             //const image = $('.pi-image-thumbnail');
             
-            let sicon = $('.pi-image-thumbnail').attr("src");
+            /* let sicon = $('.pi-image-thumbnail').attr("src");
             let charEmbed = new Discord.RichEmbed()
             .setDescription("Character Information")
             .setColor("#db1125")
@@ -39,9 +50,10 @@ module.exports.run = async (bot, msg, args) => {
             .addField("Season(s)", `${seasons.text()}`)
             .addField("First seen", `${seen.text()}`)
             .addField("Status", `${status.text()}`);
+            //.addField("Culture", `${culture.text()}`); */
             
 
-            msg.channel.send(charEmbed);
+            //msg.channel.send(charEmbed);
         }
     });
     
