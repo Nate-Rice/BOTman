@@ -3,8 +3,8 @@ const Discord = require("discord.js");
 module.exports.run = async (bot, msg, args) => {
   let rUser = msg.guild.member(msg.mentions.users.first() || msg.guild.members.get(args[0]));
   if(!rUser) return msg.channel.send("Unable to find user.");
-  console.log(args);
   let rreason = args.join(" ").slice(21);
+  console.log(rreason);
 
   let reportEmbed = new Discord.RichEmbed()
   .setDescription("Reports")
@@ -14,10 +14,9 @@ module.exports.run = async (bot, msg, args) => {
   .addField("Time", msg.createdAt)
   .addField("Reason", rreason);
 
-  let reportschannel = msg.guild.channels.find(`name`, "reports");
+  let reportschannel = msg.guild.channels.find(channel => channel.name === "reports");
   if (!reportschannel) return msg.channel.send("Couldn't find reports channel.");
 
-  msg.delete().catch(O_o=>{});
   reportschannel.send(reportEmbed);
 
 }

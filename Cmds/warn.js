@@ -32,7 +32,8 @@ module.exports.run = async (bot, msg, args) => {
     .addField("Number of Warnings", warns[User.id].warns)
     .addField("Reason", Reason);
 
-    let wChannel = msg.guild.channels.find(`name`, "dev");
+    //let wChannel = msg.guild.channels.find(`name`, "dev");
+    let wChannel = msg.guild.channels.find(x => x.name === "dev");
     if (!wChannel) return MessageChannel.reply("Couldn't find channel");
     wChannel.send(wEmbed);
 

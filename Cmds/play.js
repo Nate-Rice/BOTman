@@ -16,18 +16,13 @@ module.exports.run = async (bot, msg, args) => {
     if (!validate) return msg.channel.send("Please use a valid URL");
 
     let info = await ytdl.getInfo(args[0]);
-    let connection = await msg.member.voiceChannel.join();
-    let dispatcher = await connection.playStream(ytdl(args[0], {filter: 'audioonly'}));
-    dispatcher.setVolume(0.5);
-
-    /* const streamOptions = { seek: 0, volume: 1 };
-
-    let voiceConnection = msg.member.voiceChannel.join()
-    .then(voiceConnection => {
-        const stream = ytdl(args[0], { filter : 'audioonly' });
-        const streamDispatcher = voiceConnection.playStream(stream, streamOptions);
-    })
-    .catch(console.error); */
+    try {
+        let connection = await msg.member.voiceChannel.join();
+        let dispatcher = await connection.playStream(ytdl(args[0], {filter: 'audioonly'}));
+        dispatcher.setVolume(0.5);
+    } catch(err) {
+        console.error(err);
+    }
 
     msg.channel.send(`Now playing: ${info.title}`);
 

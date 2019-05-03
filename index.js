@@ -3,12 +3,12 @@ const Discord = require("discord.js");
 const bot = new Discord.Client({disableEveryone: true});
 const fs = require("fs");
 let id = JSON.parse(fs.readFileSync("./disabled.json"));
-bot.commands = new Discord.Collection(); //Discord utility class for storing data, like Map()
+bot.commands = new Discord.Collection();
 
 
-fs.readdir("./cmds/", (error, cfiles) => { //if file is not found, give error
+fs.readdir("./cmds/", (error, cfiles) => { 
   if(error) console.log(error);
-  let jsF = cfiles.filter(file => file.split(".").pop() === "js") //Adding only JS files to array
+  let jsF = cfiles.filter(file => file.split(".").pop() === "js") 
   if(jsF.length <= 0){
     console.log("Couldn't find commands.");
     return;
@@ -17,7 +17,7 @@ fs.readdir("./cmds/", (error, cfiles) => { //if file is not found, give error
   jsF.forEach(file  => { 
     let cmds = require(`./cmds/${file}`);
     console.log(`${file} loaded!`);
-    bot.commands.set(cmds.help.name, cmds); //Adding commands to Discord Collection
+    bot.commands.set(cmds.help.name, cmds); 
   });
 });
 
@@ -31,20 +31,18 @@ bot.on("message", async msg => {
   if(msg.channel.type === "dm") return;
 
   let prefix = botconfig.prefix;
-  let splitMsg = msg.content.split(" "); //Decomposing string into an array
+  let splitMsg = msg.content.split(" "); 
   let cmd = splitMsg[0];
   let args = splitMsg.slice(1); 
 
 
   if (typeof id[cmd.slice(prefix.length)] === 'undefined') {
     let commandfile = bot.commands.get(cmd.slice(prefix.length));
-    if(commandfile) commandfile.run(bot, msg, args); //Run the `exports.run()` function defined in each command.
+    if(commandfile) commandfile.run(bot, msg, args); 
   } else if (cmd.slice(prefix.length) == id[cmd.slice(prefix.length)].id) {
     msg.channel.send("This command has been disabled!");
   }
 
-  //let commandfile = bot.commands.get(cmd.slice(prefix.length));
-  //if(commandfile) commandfile.run(bot, msg, args); //Run the `exports.run()` function defined in each command.
 
 });
 
