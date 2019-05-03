@@ -3,13 +3,13 @@ const Discord = require("discord.js");
 module.exports.run = async (bot, msg, args) => {
   let rUser = msg.guild.member(msg.mentions.users.first() || msg.guild.members.get(args[0]));
   if(!rUser) return msg.channel.send("Unable to find user.");
-  let rreason = args.join(" ").slice(22); //22 for the user's ID number
-  //console.log(rreason);
+  console.log(args);
+  let rreason = args.join(" ").slice(21);
 
   let reportEmbed = new Discord.RichEmbed()
   .setDescription("Reports")
   .setColor("#db1125")
-  .addField("Reported User", `${rUser} with ID: ${msg.author.id}`)
+  .addField("Reported User", `${rUser} with ID: ${rUser.id}`)
   .addField("Channel", msg.channel)
   .addField("Time", msg.createdAt)
   .addField("Reason", rreason);

@@ -27,8 +27,8 @@ bot.on("ready", async () => {
 });
 
 bot.on("message", async msg => {
-  if(msg.author.bot) return; //check if bot is talking to itself
-  if(msg.channel.type === "dm") return; //check if you can Direct Message bot
+  if(msg.author.bot) return; 
+  if(msg.channel.type === "dm") return;
 
   let prefix = botconfig.prefix;
   let splitMsg = msg.content.split(" "); //Decomposing string into an array

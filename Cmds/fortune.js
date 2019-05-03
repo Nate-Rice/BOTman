@@ -10,8 +10,7 @@ module.exports.run = async (bot, msg, args) => {
     ];
 
 
-  let result = Math.floor((Math.random() * fortunes.length)); //Math.random() gets number between 0 and 1
-                                                             //Math.floor() grabs less than or equal value
+  let result = Math.floor((Math.random() * fortunes.length));
 
   msg.channel.send(fortunes[result]);
 

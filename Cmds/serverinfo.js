@@ -3,7 +3,6 @@ const ytdl = require("ytdl-core");
 
 module.exports.run = async (bot, msg, args) => {
     
-    //if (msg.guild.voiceConnection) msg.guild.voiceConnection.disconnect();
     let sicon = msg.guild.iconURL;
     let serverembed = new Discord.RichEmbed()
     .setDescription("Server Information")

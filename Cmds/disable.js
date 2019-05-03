@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 const ms = require("ms");
-//const botconfig = require("./warnings.json");
 let id = JSON.parse(fs.readFileSync("./disabled.json"));
 
 

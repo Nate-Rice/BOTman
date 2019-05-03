@@ -6,7 +6,7 @@ module.exports.run = async (bot, msg, args) => {
     if (err) msg.channel.send(err);
     var current = result[0].current;
     var location = result[0].location;
-    var forecast = result[0].forecast; //implement all days of the week possibly?
+    var forecast = result[0].forecast; 
 
     const embed = new Discord.RichEmbed()
       .setDescription(`**${current.skytext}**`)

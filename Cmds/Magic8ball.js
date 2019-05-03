@@ -6,8 +6,7 @@ module.exports.run = async (bot, msg, args) => {
   let replies = ["Yes.", "No.", "I don't know.", "Ask again later."];
 
 
-  let reply = Math.floor((Math.random() * replies.length)); //Math.random() gets number between 0 and 1
-                                                             //Math.floor() grabs less than or equal integer
+  let reply = Math.floor((Math.random() * replies.length)); 
 
   let answerEmbed = new Discord.RichEmbed()
   .setColor("#ab3ae0")
